@@ -25,3 +25,4 @@ CREATE TABLE public.xlr_tags
     tag_value character varying(255)
 
 create foreign table xlr_tags (ci_uid numeric NOT NULL,tag_value character varying(255) ) server oracle_pg options (table 'XLR_TAGS');
+    CREATE TABLE xlr_tags_new_table AS TABLE xlr_tags;
