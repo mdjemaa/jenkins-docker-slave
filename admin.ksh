@@ -1,14 +1,14 @@
 #!/bin/sh
 
 ## ==========================================================================================
-## Script de démarrage, d'arret et de notification de statut
-## pour les différentes instances de HUDSON
+## Script de dÃ©marrage, d'arret et de notification de statut
+## pour les diffÃ©rentes instances de HUDSON
 ##
 ## Utilisation :
 ## admin.ksh <commande> <nom de l'instance>
 ##
 ## Exemple : 	admin.ksh start 1.2
-##				démarre l'instance indiquée dans le fichier ../instances/1.2.config
+##				dÃ©marre l'instance indiquÃ©e dans le fichier ../instances/1.2.config
 ##
 ## ==========================================================================================
 ## Historique des modifications:
@@ -18,8 +18,8 @@
 ## MLE 10/06/2010 : Modifs pour installer plusieurs instances sur psd216 (ports ajp13 et udp) et 
 ## 		factorisation du script pour les differents environnements
 ## MLE 04/07/2010 : utilisation de fichier de conf pour les differentes instances
-## MLE 26/08/2010 : Intégration du mode "all instances"
-## MLE 08/11/2010 : Réorganisation de la structure des repertoires de l'usine (prod, int, test > version)
+## MLE 26/08/2010 : IntÃ©gration du mode "all instances"
+## MLE 08/11/2010 : RÃ©organisation de la structure des repertoires de l'usine (prod, int, test > version)
 ## MLE 08/12/2010 : Ajout des options memoire java pour le start
 ## FANNANE 05/06/2012 : Migration hudson vers jenkins 1.ajout param dump | 2. chg hudson>jenkins
 ##
@@ -144,11 +144,11 @@ case ${COMMAND} in
     # Arret du serveur
 	pid=`eval ${FIND_PID}`	
 	if [ "xx$pid" = "xx" ]; then
-		echo "Le processus ${HUDSON_WAR_FILE} en écoute sur le port ${HUDSON_HTTP_PORT} est deja arrete.\n"
+		echo "Le processus ${HUDSON_WAR_FILE} en Ã©coute sur le port ${HUDSON_HTTP_PORT} est deja arrete.\n"
 	else
 		nbProcess=`eval ${FIND_PID} | wc -l`		
 		if [ ${nbProcess} -eq 1 ]; then
-			echo "Arret du processus ${HUDSON_WAR_FILE} en écoute sur le port ${HUDSON_HTTP_PORT} (PID : ${pid})\n"
+			echo "Arret du processus ${HUDSON_WAR_FILE} en Ã©coute sur le port ${HUDSON_HTTP_PORT} (PID : ${pid})\n"
 			kill -9 ${pid}
 		else
 			echo "ERREUR, le nombre de process correspondants est different de 1 : ${nbProcess}\n"	
@@ -157,5 +157,11 @@ case ${COMMAND} in
     ;;
 esac
 
+from lxml import etree
 
+tree = etree.parse("thefile.xml")
+my_list = []
+for user in tree.xpath("/map/entry[string='global']/list/string"):
+    my_list.append(user.text)
+print (my_list)
 
