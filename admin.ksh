@@ -34,3 +34,23 @@ user.save()
 
 return result.plainValue
 
+
+$JENKINS_URL="https://jenkins.intra"
+$JENKINS_USER="admin"
+$JENKINS_API_TOKEN="admin123"
+$NODE_NAME="testnode-ps"
+
+# https://stackoverflow.com/questions/27951561/use-invoke-webrequest-with-a-username-and-password-for-basic-authentication-on-t
+$bytes = [System.Text.Encoding]::ASCII.GetBytes("${JENKINS_USER}:${JENKINS_API_TOKEN}")
+$base64 = [System.Convert]::ToBase64String($bytes)
+$basicAuthValue = "Basic $base64"
+$headers = @{ Authorization = $basicAuthValue;  }
+
+$jnlpLocal="C:\jenkins_home\slave-agent.jnlp"
+Invoke-WebRequest -Headers $headers -Method Get -Uri "http://localhost:8080/computer/windows01/slave-agent.jnlp" -OutFile $jnlpLocal
+
+[xml]$jnlpFile = Get-Content $jnlpLocal
+$secret = Select-Xml "//jnlp/application-desc/argument[1]/text()" $jnlpFile
+
+Write-Output "secret content $secret" 
+
