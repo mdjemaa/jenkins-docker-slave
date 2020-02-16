@@ -53,4 +53,6 @@ Invoke-WebRequest -Headers $headers -Method Get -Uri "http://localhost:8080/comp
 $secret = Select-Xml "//jnlp/application-desc/argument[1]/text()" $jnlpFile
 
 Write-Output "secret content $secret" 
+https://subscription.packtpub.com/book/application_development/9781784390891/1/ch01lvl1sec12/disaster-recovery-in-jenkins
+
 
